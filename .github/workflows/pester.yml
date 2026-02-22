@@ -2,22 +2,31 @@ name: Pester
 
 on:
   push:
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 
 jobs:
   test:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install Pester
         shell: pwsh
         run: |
-          Install-Module Pester -Force -Scope CurrentUser
+          Install-Module Pester -Force -Scope CurrentUser -SkipPublisherCheck
+
+      - name: List tests
+        shell: pwsh
+        run: |
+          Write-Host "Repo root:" (Get-Location)
+          Get-ChildItem -Recurse -Filter "*.Tests.ps1" -File | ForEach-Object { $_.FullName }
+
       - name: Run tests
         shell: pwsh
         run: |
           $tests = Get-ChildItem -Recurse -Filter "*.Tests.ps1" -File | Select-Object -Expand FullName
-if (-not $tests) { Write-Host "No Pester tests found; skipping."; exit 0 }
-Invoke-Pester -Path $tests -CI
-
-
+          if (-not $tests) { Write-Host "No Pester tests found; skipping."; exit 0 }
+          Invoke-Pester -Path $tests -CI
