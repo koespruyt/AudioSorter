@@ -613,6 +613,11 @@ function Invoke-AudioSorter {
       else { $apiText = "API: ?" }
     }
 
+    # Normalize genre casing (bv. "electronic" -> "Electronic")
+    if ($genreResolved -and $genreResolved.genre -and ($genreResolved.genre -ceq $genreResolved.genre.ToLowerInvariant())) {
+      try { $genreResolved.genre = (Get-Culture).TextInfo.ToTitleCase($genreResolved.genre) } catch {}
+    }
+
     Write-ASLog -Message ("  Step 3: Genre -> {0} | Source: {1} | {2}" -f $genreName, $genreResolved.source, $apiText) -Color DarkCyan -NoTimestamp -LogFile $logFile
 
     # Destination
