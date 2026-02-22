@@ -1,0 +1,27 @@
+{
+  "workRoot": "_AudioSorter",
+  "extensions": [
+    "mp3",
+    "flac",
+    "wav",
+    "m4a",
+    "aac",
+    "ogg"
+  ],
+  "destinationTemplate": "{genre}\\{bpmRange}",
+  "genre": {
+    "unknownName": "Unknown",
+    "sanitizeForFolder": true
+  },
+  "bpm": {
+    "useSubfolders": true,
+    "bucketSize": 10,
+    "noBpmFolderName": "No-BPM",
+    "doubleIfBetweenMin": 60,
+    "doubleIfBetweenMax": 95
+  },
+  "musicBrainz": {
+    "delayMs": 900,
+    "userAgent": "AudioSorter/1.0 (+https://github.com/yourname/AudioSorter)"
+  }
+}
