@@ -56,7 +56,7 @@ function ConvertTo-ASSafeFolderName {
     [int]$MaxLength = 60,
     [string]$Default = "Unknown"
   )
-  $n = ( $$(if($null -eq $Name) { "" } else { [string]$Name }) ).Trim()
+  $n = ( $(if($null -eq $Name) { "" } else { [string]$Name }) ).Trim()
   if ([string]::IsNullOrWhiteSpace($n)) { return $Default }
 
   # replace invalid Windows filename chars
@@ -471,7 +471,7 @@ function Invoke-AudioSorter {
   $dst = if ($Target) { (Resolve-Path $Target).Path } else { $src }
 
   # Work dirs
-  $workRoot = Join-Path $dst $$(if($null -ne $profileObj.workRoot -and [string]$profileObj.workRoot) { [string]$profileObj.workRoot } else { "_AudioSorter" })
+  $workRoot = Join-Path $dst $(if($null -ne $profileObj.workRoot -and [string]$profileObj.workRoot) { [string]$profileObj.workRoot } else { "_AudioSorter" })
   $toolsDir = Join-Path $workRoot "tools"
   $logsDir  = Join-Path $workRoot "logs"
   New-Item -ItemType Directory -Path $toolsDir -Force | Out-Null
@@ -493,7 +493,7 @@ function Invoke-AudioSorter {
   $extensions = @($profileObj.extensions)
   $extRegex = Get-ASFileExtensionsRegex -Extensions $extensions
 
-  $unknownGenre = $$(if($null -ne $profileObj.genre -and $null -ne $profileObj.genre.unknownName -and [string]$profileObj.genre.unknownName) { [string]$profileObj.genre.unknownName } else { "Unknown" })
+  $unknownGenre = $(if($null -ne $profileObj.genre -and $null -ne $profileObj.genre.unknownName -and [string]$profileObj.genre.unknownName) { [string]$profileObj.genre.unknownName } else { "Unknown" })
   $sanitizeGenre = $true
   if ($null -ne $profileObj.genre -and $null -ne $profileObj.genre.sanitizeForFolder) { $sanitizeGenre = [bool]$profileObj.genre.sanitizeForFolder }
 
@@ -511,7 +511,7 @@ function Invoke-AudioSorter {
   $doubleMax = 95
   if ($null -ne $profileObj.bpm -and $null -ne $profileObj.bpm.doubleIfBetweenMax) { $doubleMax = [int]$profileObj.bpm.doubleIfBetweenMax }
 
-  $template = $$(if($null -ne $profileObj.destinationTemplate -and [string]$profileObj.destinationTemplate) { [string]$profileObj.destinationTemplate } else { "{genre}\{bpmRange}" })
+  $template = $(if($null -ne $profileObj.destinationTemplate -and [string]$profileObj.destinationTemplate) { [string]$profileObj.destinationTemplate } else { "{genre}\{bpmRange}" })
 
   $mbDelay = 900
   if ($null -ne $profileObj.musicBrainz -and $null -ne $profileObj.musicBrainz.delayMs) { $mbDelay = [int]$profileObj.musicBrainz.delayMs }
@@ -696,5 +696,4 @@ function Invoke-AudioSorter {
 }
 
 Export-ModuleMember -Function Invoke-AudioSorter
-
 
