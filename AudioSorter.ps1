@@ -1,5 +1,6 @@
 [CmdletBinding(SupportsShouldProcess=$true)]
 param(
+  [switch]$Help,
   [Parameter(Mandatory=$true)]
   [string]$Source,
 
@@ -27,7 +28,13 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $modPath = Join-Path $here "src\AudioSorter\AudioSorter.psd1"
 Import-Module $modPath -Force
 
+if ($Help) {
+  Import-Module $modPath -Force
+  Get-Help AudioSorter\Invoke-AudioSorter -Full
+  return
+}
 AudioSorter\Invoke-AudioSorter @PSBoundParameters
+
 
 
 
