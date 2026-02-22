@@ -1,12 +1,10 @@
 Describe "AudioSorter smoke" {
-
-  It "Module can be imported" {
-    $mod = Join-Path $PSScriptRoot "..\src\AudioSorter\AudioSorter.psd1"
-    Test-Path $mod | Should -BeTrue
-    Import-Module $mod -Force
+  It "Module manifest exists" {
+    Test-Path (Join-Path $PSScriptRoot "..\src\AudioSorter\AudioSorter.psd1") | Should -BeTrue
   }
 
-  It "Invoke-AudioSorter command exists" {
+  It "Module imports and exports Invoke-AudioSorter" {
+    Import-Module (Join-Path $PSScriptRoot "..\src\AudioSorter\AudioSorter.psd1") -Force
     (Get-Command Invoke-AudioSorter -ErrorAction Stop).CommandType | Should -Be 'Function'
   }
 }
