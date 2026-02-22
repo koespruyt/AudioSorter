@@ -27,6 +27,9 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $modPath = Join-Path $here "src\AudioSorter\AudioSorter.psd1"
 Import-Module $modPath -Force
 
-AudioSorter\AudioSorter\Invoke-AudioSorter @PSBoundParameters
+AudioSorter\Invoke-AudioSorter @PSBoundParameters
+
+
+
 
 
