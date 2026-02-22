@@ -20,7 +20,7 @@ It can:
 ### 1) Clone and run (Windows PowerShell 5.1+ or PowerShell 7+)
 
 ```powershell
-git clone <YOUR_REPO_URL>
+git clone https://github.com/koespruyt/AudioSorter
 cd AudioSorter
 Unblock-File .\AudioSorter.ps1
 ```
