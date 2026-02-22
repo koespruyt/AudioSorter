@@ -54,15 +54,36 @@ etc.
 ### Mandatory
 - PowerShell 5.1+ (Windows) or PowerShell 7+
 
-### Optional (recommended)
-- `ffprobe` and `ffmpeg` (in PATH)
-  - Genre & BPM-from-tags uses `ffprobe`
-  - BPM-from-audio uses `ffmpeg`
-- `node` (in PATH) for BPM-from-audio snippet
+### Optional (recommended) tools
 
-If tools are missing, the sorter falls back gracefully (logs `Missing tools` and continues).
+De sorter kan zonder deze tools draaien, maar met extra tools krijg je **betere genre/BPM detectie**.
 
----
+- **ffprobe** (onderdeel van FFmpeg) — *aanrader*
+  - Wordt gebruikt om **tags** uit audio te lezen (Genre, BPM, Artist, Title, …)
+  - Zonder ffprobe: tag-based genre/BPM is beperkter (de sorter blijft verder werken).
+
+- **ffmpeg** (FFmpeg) — *aanrader als je BPM uit audio wil*
+  - Nodig voor **BPM-from-audio** (decode/convert om BPM te analyseren)
+  - Zonder ffmpeg: `-DetectBpmFromAudio` wordt automatisch overgeslagen (logt “missing tool”).
+
+- **node** (Node.js) — *aanrader als je BPM uit audio wil*
+  - Nodig om de **BPM detector (`tools/bpm`)** te draaien
+  - Zonder node: `-DetectBpmFromAudio` wordt automatisch overgeslagen (logt “missing tool”).
+
+### Behavior when tools are missing
+- De sorter **crasht niet** als een tool ontbreekt.
+- Hij logt duidelijk welke tool ontbreekt en **gaat verder** met wat wél kan:
+  - Geen ffprobe → minder/geen tag-based genre/BPM
+  - Geen ffmpeg of node → geen BPM-from-audio (tracks gaan dan naar `No-BPM` als er ook geen BPM tag is)
+
+### Quick check (Windows)
+```powershell
+ffprobe -version
+ffmpeg -version
+node -v
+
+
+
 
 ## Profiles (JSON)
 
