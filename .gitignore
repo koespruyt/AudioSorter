@@ -1,0 +1,16 @@
+# runtime outputs
+_AudioSorter/
+**/_AudioSorter/
+*.log
+*.tmp
+*.wav
+
+# OS
+Thumbs.db
+.DS_Store
+
+# node
+node_modules/
+
+# powershell
+*.ps1xml.user
