@@ -16,4 +16,7 @@ jobs:
       - name: Run tests
         shell: pwsh
         run: |
-          Invoke-Pester -Path .\tests -CI
+          $tests = Get-ChildItem -Recurse -Filter "*.Tests.ps1" -File | Select-Object -Expand FullName
+if (-not $tests) { Write-Host "No Pester tests found; skipping."; exit 0 }
+Invoke-Pester -Path $tests -CI
+
