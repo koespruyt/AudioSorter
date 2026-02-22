@@ -135,12 +135,9 @@ See **docs/PROFILES.md** for details.
 ```
 ### Best practice on root folder of your music
 ```powershell
+.\AudioSorter.ps1 -Source "D:\-=MuSiC=-\RETRO" -Profile profiles\default.json -Move -DetectBpmFromAudio -AudioBpmSeconds 30 -OnlineGenreLookup
 
-**.\AudioSorter.ps1 -Source "D:\-=MuSiC=-\RETRO" -Profile profiles\default.json -Move -DetectBpmFromAudio -AudioBpmSeconds 30 -OnlineGenreLookup******
-
-...
-...
-
+```
 ## Notes / caveats
 
 - **MusicBrainz** lookups are rate-limited; the profile includes a small delay (`delayMs`) to be friendly.
