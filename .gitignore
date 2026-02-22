@@ -14,3 +14,7 @@ node_modules/
 
 # powershell
 *.ps1xml.user
+
+*.bak
+
+*Fix*.ps1
