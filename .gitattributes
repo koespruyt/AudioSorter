@@ -1,0 +1,16 @@
+# Normalize line endings in repo
+* text=auto
+
+# PowerShell scripts: keep LF in repo
+*.ps1  text eol=lf
+*.psm1 text eol=lf
+*.psd1 text eol=lf
+
+# YAML/JSON/Markdown
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+
+# JS
+*.js   text eol=lf

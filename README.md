@@ -1,3 +1,5 @@
+[![Pester](https://github.com/koespruyt/AudioSorter/actions/workflows/pester.yml/badge.svg)](https://github.com/koespruyt/AudioSorter/actions/workflows/pester.yml)
+
 # AudioSorter (PowerShell)
 
 Profile-driven **music library sorter** for **any music genre** (not just retro/electronic).
@@ -159,3 +161,4 @@ See **docs/PROFILES.md** for details.
 
 ## License
 MIT – see `LICENSE`.
+
