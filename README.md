@@ -131,9 +131,15 @@ See **docs/PROFILES.md** for details.
 ### Cleanup empty folders after moving
 ```powershell
 .\AudioSorter.ps1 -Source "D:\Music" -Move -CleanupEmptyDirs
-```
 
----
+```
+### Best practice on root folder of your music
+```powershell
+
+**.\AudioSorter.ps1 -Source "D:\-=MuSiC=-\RETRO" -Profile profiles\default.json -Move -DetectBpmFromAudio -AudioBpmSeconds 30 -OnlineGenreLookup******
+
+...
+...
 
 ## Notes / caveats
 
