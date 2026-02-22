@@ -618,6 +618,26 @@ function Invoke-AudioSorter {
       try { $genreResolved.genre = (Get-Culture).TextInfo.ToTitleCase($genreResolved.genre) } catch {}
     }
 
+    # FAIL->MISS (Fallback): API bereikbaar maar geen bruikbare genre-hint gevonden.
+    $__src = $null
+    if ($genreResolved) {
+      if ($genreResolved.PSObject.Properties.Name -contains "source") { $__src = $genreResolved.source }
+      elseif ($genreResolved.PSObject.Properties.Name -contains "Source") { $__src = $genreResolved.Source }
+    }
+    if ($OnlineGenreLookup -and $__src -eq "Fallback" -and $apiText -match "API:\s*FAIL") { $apiText = ($apiText -replace "API:\s*FAIL","API: MISS") }
+    
+    # Normalize genre casing (TitleCase) so folders are "Electronic" not "electronic"
+    $__g = $null
+    if ($genreResolved) {
+      if ($genreResolved.PSObject.Properties.Name -contains "genre") { $__g = $genreResolved.genre }
+      elseif ($genreResolved.PSObject.Properties.Name -contains "Genre") { $__g = $genreResolved.Genre }
+    }
+    if ($__g -and ($__g -ceq $__g.ToLowerInvariant())) {
+      try { $__g = (Get-Culture).TextInfo.ToTitleCase($__g) } catch {}
+      if ($genreResolved.PSObject.Properties.Name -contains "genre") { $genreResolved.genre = $__g }
+      if ($genreResolved.PSObject.Properties.Name -contains "Genre") { $genreResolved.Genre = $__g }
+    }
+
     Write-ASLog -Message ("  Step 3: Genre -> {0} | Source: {1} | {2}" -f $genreName, $genreResolved.source, $apiText) -Color DarkCyan -NoTimestamp -LogFile $logFile
 
     # Destination
